@@ -1,6 +1,7 @@
 package nl.sundeep.simplevanish;
 
 
+import nl.sundeep.simplevanish.utils.Format;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -71,13 +72,13 @@ public class Main extends JavaPlugin {
                     vanishPlayer(target);
                     target.sendMessage(ChatColor.GRAY + "You have vanished");
                     player.sendMessage(ChatColor.GRAY + target.getName() + " is now invisible");
-                    getServer().broadcastMessage(ChatColor.YELLOW + target.getName() + " left the game.");
+                    getServer().broadcastMessage(Format.chat("&4" + target.getName() + " left the game."));
                     return true;
                 } else {
                     showPlayer(target);
                     target.sendMessage(ChatColor.GRAY + "You are no longer invisible");
                     player.sendMessage(ChatColor.GRAY + target.getName() + " is no longer invisible");
-                    getServer().broadcastMessage(ChatColor.YELLOW + target.getName() + " joined the game.");
+                    getServer().broadcastMessage(Format.chat("&4" + target.getName() + " joined the game."));
                     return true;
                 }
             }
@@ -85,12 +86,12 @@ public class Main extends JavaPlugin {
             if (!isVanished(player)) {
                 vanishPlayer(player);
                 player.sendMessage(ChatColor.GRAY + "You have vanished");
-                getServer().broadcastMessage(ChatColor.YELLOW + player.getName() + " left the game.");
+                getServer().broadcastMessage(Format.chat("&4" + player.getName() + " left the game."));
                 return true;
             } else {
                 showPlayer(player);
                 player.sendMessage(ChatColor.GRAY + "You are visible again");
-                getServer().broadcastMessage(ChatColor.YELLOW + player.getName() + " joined the game.");
+                getServer().broadcastMessage(Format.chat("&4" + player.getName() + " joined the game."));
                 return true;
             }
         }
