@@ -1,0 +1,29 @@
+name: SimpleVanish
+version: '1.0'
+main: nl.sundeep.simplevanish.Main
+authors: [ Sundeep_ ]
+description: A simple vanish plugin
+website: https://panel.ducky.codes
+commands:
+  vanish:
+    description: Vanish
+    usage: /vanish, /vanish list, /vanish <playername>
+permissions:
+  vanish.*:
+    description: Enables all vanish permission nodes
+    default: op
+    children:
+      vanish.vanish: true
+      vanish.list: true
+      vanish.seeall: true
+      vanish.vanishother: true
+    vanish.vanish:
+      description: Allows a player to vanish
+    vanish.list:
+      description: Allows a player to list vanished players
+    vanish.seeall:
+      description: Allows a player to see all vanished players
+    vanish.vanishother:
+      description: Allows a player to set other players as vanished
+      children:
+        vanish.vanish: true
