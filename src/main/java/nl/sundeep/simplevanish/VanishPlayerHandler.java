@@ -37,7 +37,6 @@ public class VanishPlayerHandler implements Listener {
         Entity entity = event.getEntity();
         if(!(entity instanceof Player)) return;
         Player player = (Player) entity;
-        //check if vanished, if so: cancel
     }
 
     @EventHandler
