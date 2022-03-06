@@ -2,7 +2,6 @@ package nl.sundeep.simplevanish;
 
 
 import nl.sundeep.simplevanish.utils.Format;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -41,7 +40,7 @@ public class Main extends JavaPlugin {
         if (args.length > 0) {
             if (args[0].equalsIgnoreCase("list")) {
                 if (!player.hasPermission("vanish.list")) {
-                    player.sendMessage(ChatColor.GRAY + "You don't have permission");
+                    player.sendMessage((Format.chat("&7" + "You don't have permission")));
                     return true;
                 }
                 if (hiddenUsernames.size() > 0) {
@@ -53,9 +52,9 @@ public class Main extends JavaPlugin {
                         }
                     }
 
-                    player.sendMessage(ChatColor.GRAY + "Hidden players: " + builder.toString());
+                    player.sendMessage(Format.chat("&7" + "Hidden players: " + builder.toString()));
                 } else {
-                    player.sendMessage(ChatColor.GRAY + "There are no hidden players");
+                    player.sendMessage(Format.chat("&7" + "There are no hidden players"));
                 }
                 return true;
             } else if (args[0].equalsIgnoreCase("help") || args[0].equalsIgnoreCase("?")) {
@@ -64,20 +63,20 @@ public class Main extends JavaPlugin {
                 Player target = getServer().getPlayer(args[0]);
                 if (target == null) target = getServer().getPlayerExact(args[0]);
                 if (target == null) {
-                    player.sendMessage(ChatColor.GRAY + "Player doesn't exist or too many results");
+                    player.sendMessage(Format.chat("&7" + "Player doesn't exist or too many results"));
                     return true;
                 }
 
                 if (!isVanished(target)) {
                     vanishPlayer(target);
-                    target.sendMessage(ChatColor.GRAY + "You have vanished");
-                    player.sendMessage(ChatColor.GRAY + target.getName() + " is now invisible");
+                    target.sendMessage(Format.chat("&7" + "You have vanished"));
+                    player.sendMessage(Format.chat("&7" + target.getName() + " is now invisible"));
                     getServer().broadcastMessage(Format.chat("&4" + target.getName() + " left the game."));
                     return true;
                 } else {
                     showPlayer(target);
-                    target.sendMessage(ChatColor.GRAY + "You are no longer invisible");
-                    player.sendMessage(ChatColor.GRAY + target.getName() + " is no longer invisible");
+                    target.sendMessage(Format.chat("&7" + "You are no longer invisible"));
+                    player.sendMessage(Format.chat("&7" + target.getName() + " is no longer invisible"));
                     getServer().broadcastMessage(Format.chat("&4" + target.getName() + " joined the game."));
                     return true;
                 }
@@ -85,12 +84,12 @@ public class Main extends JavaPlugin {
         } else if (player.hasPermission("vanish.vanish")) {
             if (!isVanished(player)) {
                 vanishPlayer(player);
-                player.sendMessage(ChatColor.GRAY + "You have vanished");
+                player.sendMessage(Format.chat("&7" + "You have vanished"));
                 getServer().broadcastMessage(Format.chat("&4" + player.getName() + " left the game."));
                 return true;
             } else {
                 showPlayer(player);
-                player.sendMessage(ChatColor.GRAY + "You are visible again");
+                player.sendMessage(Format.chat("&4" + "You are visible again"));
                 getServer().broadcastMessage(Format.chat("&4" + player.getName() + " joined the game."));
                 return true;
             }
@@ -108,11 +107,11 @@ public class Main extends JavaPlugin {
             if (p1 == player) {
                 continue;
             } else if (p1.hasPermission("vanish.seeall")) {
-                p1.sendMessage(ChatColor.GRAY + player.getName() + " vanished");
+                p1.sendMessage(Format.chat("&7" + player.getName() + " vanished"));
                 continue;
             } else if (p1.hasPermission("vanish.list")) {
                 p1.hidePlayer(player);
-                p1.sendMessage(ChatColor.GRAY + player.getName() + " vanished");
+                p1.sendMessage(Format.chat("&7" + player.getName() + " vanished"));
                 continue;
             }
             p1.hidePlayer(player);
